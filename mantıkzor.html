@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matematik Testi</title>
+<style>
+/* Mevcut CSS kodlarınızın sonuna ekleyin */
+@keyframes fadeInEffect {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Animasyonu fullscreen-bg__video class'ına uygulayın */
+.question-container{
+    animation-name: fadeInEffect;
+    animation-duration: 2s; /* Animasyonun süresi 2 saniye */
+    animation-fill-mode: forwards; /* Animasyonun bitiş durumunu koruyun */
+}
+
+
+  body, html {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url('5a.png') no-repeat center center;
+    background-size: cover;
+    animation-name: fadeInEffect;
+    animation-duration: 1s; /* Animasyonun süresi 2 saniye */
+    animation-fill-mode: forwards; /* Animasyonun bitiş durumunu koruyun */
+
+  }
+
+  .bg {
+    width: 100%;
+    height: 100%;
+    background-color: #f0f0f000; /* Arka plan rengi */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .question-container {
+    text-align: center;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 90%;
+    max-width: 600px;
+  }
+
+  .option {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 20px;
+    background-color: #ddd;
+    cursor: pointer;
+  }
+
+  .option:hover {
+    background-color: rgb(235, 232, 101);
+  }
+
+  .correct {
+    background-color: #4CAF50; /* Yeşil */
+  }
+
+  .wrong {
+    background-color: #f44336; /* Kırmızı */
+  }
+</style>
+</head>
+<body>
+
+<div class="bg">
+  <div class="question-container" id="questionContainer">
+    <!-- Sorular burada gösterilecek -->
+  </div>
+</div>
+
+<script>
+  const questions = [
+  {
+    question: "p→q, ¬q→¬r, ve r→p doğruysa, bu üç ifadenin hepsi için ortak bir sonuç çıkarabilir miyiz?",
+    options: [
+      "A) Evet, p, q, ve r birbirleriyle mantıksal olarak eşdeğerdir.",
+      "B) Hayır, yeterli bilgi yok.",
+      "C) Evet, ancak sadece p, q, ve r yanlış olduğunda."
+    ],
+    answer: "A) Evet, p, q, ve r birbirleriyle mantıksal olarak eşdeğerdir."
+  },
+  {
+    question: "(p→q)∧(q→r)∧(r→p) doğru olduğunda, p, q, ve r hakkında ne söylenebilir?",
+    options: [
+      "A) Hepsi aynı değere sahiptir (ya hep doğru ya da hep yanlış).",
+      "B) En az biri yanlıştır.",
+      "C) Hiçbiri doğru olamaz."
+    ],
+    answer: "A) Hepsi aynı değere sahiptir (ya hep doğru ya da hep yanlış)."
+  },
+  {
+    question: "p∧q doğruysa ve q→(r V s) yanlışsa, r ve s hakkında ne söylenebilir?",
+    options: [
+      "A) Her ikisi de yanlış olmalıdır.",
+      "B) En az biri doğrudur.",
+      "C) Yeterli bilgi yok."
+    ],
+    answer: "A) Her ikisi de yanlış olmalıdır."
+  },
+  {
+    question: "p V q yanlış, q V r yanlış, r V p doğru olduğunda, üç ifade hakkında ne söylenebilir?",
+    options: [
+      "A) En az iki ifade yanlıştır.",
+      "B) p, q, ve r birbirleriyle çelişir.",
+      "C) p doğru, q ve r yanlıştır."
+    ],
+    answer: "C) p doğru, q ve r yanlıştır."
+  },
+  {
+    question: "Eğer p→q doğru, q→r yanlış, ve r→p doğruysa, bu üç ifade hakkında ne söylenebilir?",
+    options: [
+      "A) p, q, ve r arasında bir çelişki var.",
+      "B) p doğru olmalıdır.",
+      "C) r yanlış olmalıdır."
+    ],
+    answer: "A) p, q, ve r arasında bir çelişki var."
+  },
+  {
+    question: "(p↔q)∧(q↔r) ifadesi doğruysa, p→r ifadesinin değeri nedir?",
+    options: [
+      "A) Doğru",
+      "B) Yanlış",
+      "C) Belirsiz"
+    ],
+    answer: "A) Doğru"
+  },
+  {
+    question: "p yanlış olduğunda, p→(q→r) ifadesinin değeri nedir?",
+    options: [
+      "A) Doğru",
+      "B) Yanlış",
+      "C) Belirsiz"
+    ],
+    answer: "A) Doğru"
+  },
+  {
+    question: "p∧q doğru ve p→(r∧s) yanlışsa, r ve s hakkında ne söylenebilir?",
+    options: [
+      "A) Her ikisi de yanlış olabilir.",
+      "B) En az biri yanlıştır.",
+      "C) Her ikisi de doğru olmalıdır."
+    ],
+    answer: "B) En az biri yanlıştır."
+  },
+  {
+    question: "p V q doğru, q V r doğru ve p∧r yanlış olduğunda, üç ifade hakkında ne söylenebilir?",
+    options: [
+      "A) p ve r birbirleriyle çelişir.",
+      "B) q mutlaka doğrudur.",
+      "C) p, q, ve r aynı değere sahip olamaz."
+    ],
+    answer: "B) q mutlaka doğrudur."
+  },
+  {
+    question: "p→q, q→r, r→s, ve s→p doğru olduğunda, bu dört ifade hakkında ne söylenebilir?",
+    options: [
+      "A) Hepsi aynı mantıksal değere sahip olmalıdır.",
+      "B) En az biri yanlış olmalıdır.",
+      "C) Hiçbiri yanlış olamaz."
+    ],
+    answer: "A) Hepsi aynı mantıksal değere sahip olmalıdır."
+  }
+];
+
+
+
+  let currentQuestionIndex = 0;
+  let correctAnswersCount = 0;
+
+  function showQuestion(questionIndex) {
+    const questionObj = questions[questionIndex];
+    const questionContainer = document.getElementById('questionContainer');
+    questionContainer.innerHTML = `<p>${questionObj.question}</p>` +
+      questionObj.options.map((option) => 
+        `<div class="option" onclick="selectOption('${option}', this)">${option}</div>`
+      ).join('');
+  }
+
+  function selectOption(selectedOption, element) {
+    const questionObj = questions[currentQuestionIndex];
+    document.querySelectorAll('.option').forEach(option => option.onclick = null); // Disable further clicks
+    if (selectedOption === questionObj.answer) {
+      element.classList.add('correct');
+      correctAnswersCount++;
+    } else {
+      element.classList.add('wrong');
+    }
+    setTimeout(() => {
+  if (currentQuestionIndex < questions.length - 1) {
+    currentQuestionIndex++;
+    showQuestion(currentQuestionIndex);
+  } else {
+    let resultImage = correctAnswersCount > 5 ? 'ahmethocaseviyesi.png' : '2a.png'; // Doğru cevap sayısına göre görsel seçimi
+    document.getElementById('questionContainer').innerHTML = `
+      <p>Test bitti! Doğru cevap sayınız: ${correctAnswersCount} / ${questions.length}</p>
+      <img src="${resultImage}" alt="Sonuç Görseli" style="max-width:100%;height:auto;">`; // Görseli göster
+  }
+}, 1000); // 1 second to next question
+
+  }
+
+  showQuestion(currentQuestionIndex);
+</script>
+
+</body>
+</html>

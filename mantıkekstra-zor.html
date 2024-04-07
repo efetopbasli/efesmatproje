@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>efetopbasli</title>
+<style>
+/* Mevcut CSS kodlarınızın sonuna ekleyin */
+@keyframes fadeInEffect {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Animasyonu fullscreen-bg__video class'ına uygulayın */
+.question-container{
+    animation-name: fadeInEffect;
+    animation-duration: 2s; /* Animasyonun süresi 2 saniye */
+    animation-fill-mode: forwards; /* Animasyonun bitiş durumunu koruyun */
+}
+
+
+  body, html {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url('6a.png') no-repeat center center;
+    background-size: cover;
+    animation-name: fadeInEffect;
+    animation-duration: 1s; /* Animasyonun süresi 2 saniye */
+    animation-fill-mode: forwards; /* Animasyonun bitiş durumunu koruyun */
+
+  }
+
+  .bg {
+    width: 100%;
+    height: 100%;
+    background-color: #f0f0f000; /* Arka plan rengi */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .question-container {
+    text-align: center;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 90%;
+    max-width: 600px;
+  }
+
+  .option {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 20px;
+    background-color: #ddd;
+    cursor: pointer;
+  }
+
+  .option:hover {
+    background-color: rgb(130, 145, 230);
+  }
+
+  .correct {
+    background-color: #4CAF50; /* Yeşil */
+  }
+
+  .wrong {
+    background-color: #f44336; /* Kırmızı */
+  }
+</style>
+</head>
+<body>
+
+<div class="bg">
+  <div class="question-container" id="questionContainer">
+    <!-- Sorular burada gösterilecek -->
+  </div>
+</div>
+
+<script>
+  const questions = [
+  {
+    question: "p→q∧q→r∧r→s∧s→p ifadesi doğruysa ve p yanlışsa, diğer ifadeler hakkında ne söylenebilir?",
+    options: ["A) q, r, ve s yanlış olmalıdır.", "B) q, r, ve s doğru olabilir.", "C) En az biri yanlış olmalıdır."],
+    answer: "A) q, r, ve s yanlış olmalıdır."
+  },
+  {
+    question: "p↔q, q↔r, r↔s, ve s↔t doğruysa, p→t ifadesinin değeri nedir?",
+    options: ["A) Doğru", "B) Yanlış", "C) Belirsiz"],
+    answer: "A) Doğru"
+  },
+  {
+    question: "p→(q→(r→(s→p))) doğruysa, bu ifade hakkında genel bir yargıya varabilir miyiz?",
+    options: ["A) Tüm ifadeler doğru olmalıdır.", "B) En az bir ifade yanlış olmalıdır.", "C) Herhangi bir genel yargıya varılamaz."],
+    answer: "C) Herhangi bir genel yargıya varılamaz."
+  },
+  {
+    question: "p∧q yanlış, q∧r doğru, r∧s yanlış, ve s∧p doğru olduğunda, bu dört ifade hakkında ne söylenebilir?",
+    options: ["A) p, q, r, ve s arasında tutarsızlık var.", "B) p ve s doğru olmalı, q ve r yanlış olmalı.", "C) q ve s yanlış olmalı, diğerleri belirsiz."],
+    answer: "C) q ve s yanlış olmalı, diğerleri belirsiz."
+  },
+  {
+    question: "p→q∧q→r∧r→s∧s→t∧t→p doğruysa ve q yanlışsa, diğer ifadeler hakkında ne söylenebilir?",
+    options: ["A) Tüm ifadeler yanlış olmalıdır.", "B) r, s, ve t yanlış olmalıdır.", "C) p ve t doğru olabilir."],
+    answer: "B) r, s, ve t yanlış olmalıdır."
+  },
+  {
+    question: "p↔(q↔r) doğru ve q↔r yanlışsa, p hakkında ne söylenebilir?",
+    options: ["A) p doğru olmalıdır.", "B) p yanlış olmalıdır.", "C) p hakkında belirsiz."],
+    answer: "A) p doğru olmalıdır."
+  },
+  {
+    question: "p∧q ve q∧r doğru, r∧s yanlış, ve s∧p doğru olduğunda, bu ifadelerin hepsi için ortak bir sonuç çıkarabilir miyiz?",
+    options: ["A) En az bir ifade yanlış olmalıdır.", "B) q, r, ve s arasında bir çelişki var.", "C) p, q, r, ve s arasında tutarlılık olmalıdır."],
+    answer: "B) q, r, ve s arasında bir çelişki var."
+  },
+  {
+    question: "p→q, q→r, ve r→(s→(t→p)) doğruysa, bu ifadeler zinciri hakkında ne söylenebilir?",
+    options: ["A) Tüm ifadeler birbirleriyle tutarlı olmalıdır.", "B) En az bir ifade yanlış olmalıdır.", "C) p, q, r, s, ve t doğru olabilir."],
+    answer: "A) Tüm ifadeler birbirleriyle tutarlı olmalıdır."
+  },
+  {
+    question: "p V q, q V r, r V s, ve s V t doğru, ama t V p yanlış olduğunda, bu ifadeler hakkında ne söylenebilir?",
+    options: ["A) p ve t yanlış olmalıdır.", "B) q, r, ve s doğru olabilir.", "C) En az bir ifade yanlış olmalıdır."],
+    answer: "A) p ve t yanlış olmalıdır."
+  },
+  {
+    question: "Eğer p yanlışsa, p→q doğru olabilir mi?",
+    options: ["A) Evet, olabilir.", "B) Hayır, olamaz.", "C) Belirsiz."],
+    answer: "A) Evet, olabilir."
+  }
+];
+
+
+
+
+  let currentQuestionIndex = 0;
+  let correctAnswersCount = 0;
+
+  function showQuestion(questionIndex) {
+    const questionObj = questions[questionIndex];
+    const questionContainer = document.getElementById('questionContainer');
+    questionContainer.innerHTML = `<p>${questionObj.question}</p>` +
+      questionObj.options.map((option) => 
+        `<div class="option" onclick="selectOption('${option}', this)">${option}</div>`
+      ).join('');
+  }
+
+  function selectOption(selectedOption, element) {
+    const questionObj = questions[currentQuestionIndex];
+    document.querySelectorAll('.option').forEach(option => option.onclick = null); // Disable further clicks
+    if (selectedOption === questionObj.answer) {
+      element.classList.add('correct');
+      correctAnswersCount++;
+    } else {
+      element.classList.add('wrong');
+    }
+    setTimeout(() => {
+  if (currentQuestionIndex < questions.length - 1) {
+    currentQuestionIndex++;
+    showQuestion(currentQuestionIndex);
+  } else {
+    let resultImage = correctAnswersCount > 10 ? 'ahmethocaseviyesi.png' : '2a.png'; // Doğru cevap sayısına göre görsel seçimi
+    document.getElementById('questionContainer').innerHTML = `
+      <p>Test bitti! Doğru cevap sayınız: ${correctAnswersCount} / ${questions.length}</p>
+      <img src="${resultImage}" alt="Sonuç Görseli" style="max-width:100%;height:auto;">`; // Görseli göster
+  }
+}, 1000); // 1 second to next question
+
+  }
+
+  showQuestion(currentQuestionIndex);
+</script>
+
+</body>
+</html>
